@@ -123,3 +123,4 @@ $ git remote a
 $ git clone repository_url
 ```
 
+### 20230713 수정
