@@ -104,3 +104,11 @@ $ git rm --cached <files>
 $ git log --oneline
 ```
 
+### 깃헙 업로드 하기
+```bash
+# 파일 수정상태 확인
+$ git add .
+$ git commit -m "내용"
+$ git push origin master
+```
+
