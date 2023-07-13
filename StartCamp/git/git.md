@@ -112,3 +112,14 @@ $ git commit -m "내용"
 $ git push origin master
 ```
 
+### 원격 저장소 git에 등록
+```bash
+$ git remote a
+```
+
+### 원격 저장소에 있는 내용 복제
+- 최초로 다운 받을때
+```bash
+$ git clone repository_url
+```
+
