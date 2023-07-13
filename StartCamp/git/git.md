@@ -53,3 +53,54 @@ $ git config --global --list
 ```bash
 $ git log
 ```
+### 최근 commit 이름 변경
+```bash
+$ git commit --amend
+#vim에서 커밋 내용 수정하기
+```
+
+> 메모장 상태에서 insert 누르고 이름 변경 esc로 탈출 ':wq'로 완전 탈출 (write, quit)
+
+### 원격 저장소
+> remote Repository
+    - github
+    - gitlab
+
+### git 설정 초기화
+```bash
+# vim을 활용해서 설정 제거하기
+# vim git 설정 파일열기
+$ vim ~/.gitconfig
+# insert 키
+# 모든 내용 삭제
+# esc
+# :wq
+```
+
+### vscode로 열기
+```bash
+$ code ~/.gitconfig
+```
+
+### 주의
+```bash
+$ git init
+# 사용시 현재 관리할 폴더에서 사용
+```
+
+### 현재 폴더
+```bash
+$ git add .
+# '.'은 현재 폴더
+```
+
+### 제거하기
+```bash
+$ git rm --cached <files>
+```
+
+### 한줄로 만들기
+```bash
+$ git log --oneline
+```
+
