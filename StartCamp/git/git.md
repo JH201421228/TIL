@@ -124,3 +124,9 @@ $ git clone repository_url
 ```
 
 ### 20230713 수정
+
+### 20230714 수업 내용
+
+- 0. init
+- add, commit push
+- pull clone
