@@ -36,15 +36,11 @@ def ro180(m, n):
 
     return mat
 
-a = int(input())
-
-b = [list(map(int, input().split())) for _ in range(a)]
-
 def emg(a, b, c, d):
 
     mat = [[0] * 3 for _ in range(d)]
 
-    for i in range(3):
+    for i in range(d):
 
         mat[i][0] = ''.join(map(str, a[i]))
         mat[i][1] = ''.join(map(str, b[i]))
@@ -52,10 +48,40 @@ def emg(a, b, c, d):
 
     return mat
 
-for i in range(a):
+mat = []
 
-    for j in range(3):
+a = []
 
-        print(emg(ro90(a, b), ro180(a, b), ro270(a, b), a)[i][j], end=' ')
+n = int(input()) 
+
+for i in range(n):
+    
+    a += [int(input())]
+
+    b = [list(map(int, input().split())) for _ in range(a[i])]
+    
+    mat += emg(ro90(a[i], b), ro180(a[i], b), ro270(a[i], b), a[i])
+
+# print(mat)
+# print(a)
+
+k = 0
+
+l = a[0]
+
+for i in range(n):
+
+    print(f'#{i+1}')
+    
+    for j in range(k, k+a[i]):
         
-    print('\n')
+        print(f'{mat[j][0]} {mat[j][1]} {mat[j][2]}')
+
+    k += a[i]    
+# for i in range(a):
+
+#     for j in range(3):
+
+#         print(emg(ro90(a, b), ro180(a, b), ro270(a, b), a)[i][j], end=' ')
+        
+#     print('')
