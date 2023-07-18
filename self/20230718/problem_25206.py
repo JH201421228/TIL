@@ -21,9 +21,9 @@ for j in range(subject_num):
         for i in range(8):
         
             if score[i] == info_subject[j][length-2:length]:
-                score = int(info_subject[j][-6])
-                total_score += ((i + 2) / 2) * score
-                subject_score += score
+                scores = int(info_subject[j][-6])
+                total_score += ((i + 2) / 2) * scores
+                subject_score += scores
 
 print(total_score / subject_score)
 
