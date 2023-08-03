@@ -21,5 +21,6 @@ for j in range(N):
         
         if not input_list:
             print(f'#{j + 1} {total}')
+            
             break
         # 상기 과정을 반복하며, 리스트에 값이 없어지면 total의 값을 출력
