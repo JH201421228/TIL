@@ -1,0 +1,37 @@
+function OnEvent(event, arg)
+    --OutputLogMessage("Event: "..event.." Arg: "..arg.."\n")
+    
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 4 then
+
+      PressAndReleaseKey('i', 'm', 'p', 'o', 'r', 't', 'spacebar','s', 'y', 's')
+      
+      Sleep(20)
+      PressAndReleaseKey('enter')
+      Sleep(50)
+
+
+      PressAndReleaseKey('s', 'y', 's', 'period', 's', 't', 'd', 'i', 'n', 'spacebar', 'equal', 'spacebar', 'o', 'p', 'e', 'n')
+      Sleep(50)
+      PressKey('lshift')
+      Sleep(50)
+      PressAndReleaseKey('9')
+      Sleep(50)
+      ReleaseKey('lshift')
+      Sleep(50)
+      PressAndReleaseKey('quote', 'i', 'n', 'p', 'u', 't', 'period', 't', 'x', 't', 'quote')
+      Sleep(50)
+      PressKey('lshift')
+      Sleep(50)
+      PressAndReleaseKey('0')
+      Sleep(50)
+      ReleaseKey('lshift')
+      PressAndReleaseKey('enter')
+      PressAndReleaseKey('enter')
+      
+    end
+    
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 5 then
+    x, y = GetMousePosition()
+    OutputLogMessage("%d, %d\n", x, y)
+    end
+end
