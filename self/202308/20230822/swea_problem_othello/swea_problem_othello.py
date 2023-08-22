@@ -22,10 +22,13 @@ for test in range(Test):
             X = 0
             if 0 <= x + dx < N and 0 <= y + dy < N and board[x+dx][y+dy] and board[x+dx][y+dy] != bw : # 좌표가 보드 안에 있고, 상하좌우 중에 지금 놓은 돌의 색과 다른 돌이 놓여있다면.
                 for k in range(2, N): # 다음 같은 색 돌을 만날 때 까지 가겠습니다.
-                    if 0 <= x + k*dx < N and 0 <= y +k*dy < N and board[x+k*dx][y+k*dy] and board[x+k*dx][y+k*dy] == bw: # 해당 방향으로 가면서 좌표 안에 있고, 돌이 놓여있고, 같은색 돌을 만나면
-                        flag = 1
-                        X = k
-                        break
+                    if 0 <= x + k*dx < N and 0 <= y +k*dy < N:
+                        if not board[x+k*dx][y+k*dy]:
+                            break
+                        elif board[x+k*dx][y+k*dy] == bw: # 해당 방향으로 가면서 좌표 안에 있고, 돌이 놓여있고, 같은색 돌을 만나면
+                            flag = 1
+                            X = k
+                            break
                 if flag:
                     for p in range(1, X):
                         board[x+p*dx][y+p*dy] = bw
