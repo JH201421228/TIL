@@ -31,7 +31,14 @@ function OnEvent(event, arg)
     end
     
     if event == "MOUSE_BUTTON_PRESSED" and arg == 5 then
-    x, y = GetMousePosition()
-    OutputLogMessage("%d, %d\n", x, y)
+    PressKey('lctrl')
+    Sleep(50)
+    PressKey('lshift')
+    Sleep(50)
+    PressAndReleaseKey('f10')
+    Sleep(50)
+    ReleaseKey('lshift')
+    Sleep(50)
+    ReleaseKey('lctrl')
     end
 end
