@@ -49,6 +49,8 @@ length = len(alpha_list)
 # print(length)
 if K < 5:
     print(0)
+elif K == 26:
+    print(N)
 else:
     ans = 0
     teach_u(0)
