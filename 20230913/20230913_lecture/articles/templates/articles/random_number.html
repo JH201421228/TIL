@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}이걸 왜 넘어가?{% endblock title %}
+
+{% block content %}
+  <h1>사용자가 작성한 숫자 : {{ number }}</h1>
+  <hr>
+  <h2>다음 숫자 : {{ next_number }}</h2>
+  <a href="{% url "articles:random_number" next_number %}">이건 어때?</a>
+  <a href="{% url "articles:random_number" before_number %}">저건 어때?</a>
+{% endblock content %}

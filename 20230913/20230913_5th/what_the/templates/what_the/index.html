@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+ 이걸 왜 하죠?
+{% endblock title %}
+
+
+{% block content %}
+  {% for books in book_list %}
+    <h1>
+      <a href={% url "what_the:why_do_this" books.author %}>
+      {{ books.author }}
+      </a>
+    </h1>
+      {% for book in books.book_list %}
+        <ul>
+          <li>{{ book }}</li>
+        </ul>
+        
+      {% endfor %}
+  {% endfor %}
+{% endblock content %}

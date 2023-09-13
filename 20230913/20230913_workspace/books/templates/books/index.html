@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}안녕{% endblock title %}
+
+{% comment %} {% block content %}내 이름은 주헌이야{% endblock content %} {% endcomment %}
+
+{% block content %}
+<ol>
+  {% for book in books %}
+    <li><a href="{% url "books:fxxk" book.author %}">{{ book.author }}</a></li>
+    <ol>
+      {% for book_name in book.book_list %}
+        <li>{{ book_name }}</li>
+        <li>본인꺼도 다 안해놓고 어디가서 뭐하십니까?</li>
+      {% endfor %}
+    </ol> 
+  {% endfor %}
+</ol>
+{% endblock content %}
+
