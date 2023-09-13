@@ -5,11 +5,14 @@ input = sys.stdin.readline
 
 def how_cost():
     while que:
-        now = que.popleft()
-        for next, next_point in graph[now]:
-            if next != start_point and (not trace[next] or trace[next] > trace[now] + next_point):
-                que.append(next)
-                trace[next] = trace[now] + next_point
+        cost, now = que.popleft()
+        if trace[now] < cost:
+            continue
+        for next, next_cost in graph[now]:
+            new_cost = cost + next_cost
+            if new_cost < trace[next]:
+                trace[next] = next_cost
+                que.append([new_cost, next])
 
 
 V, E = map(int, input().split())
@@ -18,14 +21,15 @@ graph = [[] for _ in range(V+1)]
 for _ in range(E):
     now, next, point = map(int, input().split())
     graph[now].append([next, point])
-que = deque([start_point])
-trace = [0] * (V+1)
+que = deque([[0, start_point]])
+trace = [float('inf')] * (V + 1)
+trace[start_point] = 0
 # print(graph)
 how_cost()
 for idx in range(1, V + 1):
     if idx == start_point:
         print(0)
-    elif trace[idx]:
-        print(trace[idx])
-    else:
+    elif trace[idx] == float('inf'):
         print('INF')
+    else:
+        print(trace[idx])

@@ -27,14 +27,14 @@ N, K = map(int, input().split())
 str_list = [list(input()[4:-4]) for _ in range(N)]
 # print(str_list)
 alpha_list = [0] * 26
-innit_alpha = list('antic')
-for char in innit_alpha:
+init_alpha = list('antic')
+for char in init_alpha:
     alpha_list[ord(char) - ord('a')] = 1
 # print(alpha_list)
 learn_list = []
 for inner in str_list:
     learn_list.extend(inner)
-learn_list = list(set(learn_list) - set(innit_alpha)) # 앞으로 배워야 할 리스트
+learn_list = list(set(learn_list) - set(init_alpha)) # 앞으로 배워야 할 리스트
 # print(learn_list)
 ans = 0
 length = len(learn_list)
@@ -42,6 +42,8 @@ if K >= 5:
     teach_u(0, 0)
     print(ans)
 elif K == 26:
+    print(N)
+elif K - 5 >= length:
     print(N)
 else:
     print(0)
