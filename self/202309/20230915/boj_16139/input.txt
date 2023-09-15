@@ -1,0 +1,8 @@
+seungjaehwang
+6
+a 0 0
+a 0 5
+a 0 6
+a 6 10
+a 7 10
+a 0 12
