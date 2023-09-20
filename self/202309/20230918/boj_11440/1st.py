@@ -2,7 +2,7 @@ import sys
 sys.stdin = open('input.txt')
 
 
-divide = 1_000_000_007
+divide = 1_000_000_007 # = 1000000007
 
 
 def gogo(mat, N):
