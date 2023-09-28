@@ -43,6 +43,7 @@ for _ in range(K):
 # ans_list[1][0] = 0
 
 ans = variable_tax()
+print(ans)
 ans_matrix = [[] for _ in range(K+1)]
 for idx in range(M+1):
     if ans[idx] != float('inf'):
