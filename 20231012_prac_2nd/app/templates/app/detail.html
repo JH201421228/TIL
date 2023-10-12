@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>여기는 DETAIL이긴 한데...</h2>
+  <p>{{ app.title }}</p>
+  <a href="{% url "app:index" %}">[back]</a>
+  <hr>
+  <hr>
+  {% comment %} <a href="{% url "app:new" %}">[NEW]</a> {% endcomment %}
+
+  <form action="{% url "app:delete" app.pk %}" method='POST'>
+    {% csrf_token %}
+    <input type="submit" value='DELETE'>
+  </form>
+  <a href="{% url "app:index" %}">[back]</a>
+  <hr>
+  <hr>
+  <a href="{% url "app:edit" app.pk %}">[EDIT]</a>
+{% endblock content %}

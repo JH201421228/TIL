@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% comment %} {% block content %}
+
+  <h1>NEW</h1>
+  <form action="{% url "app:create" %}" method='POST'>
+    {% csrf_token %}
+    <div>
+      <label for="title">Title: </label>
+      <input type="text" name='title' id='title'>
+    </div>
+    
+    <div>
+      <label for="content">Content: </label>
+      <textarea name="content" id="content"></textarea>
+    </div>
+
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url "app:index" %}">[back]</a>
+{% endblock content %} {% endcomment %}
+
+{% block content %}
+
+<h1>NEW</h1>
+<form action="{% url "app:create" %}" method='POST'>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit">
+
+</form>
+
+{% endblock content %}

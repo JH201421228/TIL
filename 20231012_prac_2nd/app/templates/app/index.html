@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url "app:create" %}">[CREATE]</a>
+  {% for app in apps %}
+  
+    <p>{{ app.pk }}</p>
+    <a href="{% url "app:detail" app.pk %}">
+      <p>{{ app.title }}</p>
+    </a>
+    <p>{{ app.content }}</p>
+    <p>{{ app.price }}</p>
+    <hr>
+    <hr>
+    
+
+  {% endfor %}
+
+{% endblock content %}
