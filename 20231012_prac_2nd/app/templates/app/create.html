@@ -6,5 +6,9 @@
 <hr>
 <hr>
 <a href="{% url "app:index" %}">[INDEX]</a>
-
+<form action="{% url "app:create" %}" method='POST' enctype='multipart/form-data'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit">
+</form>
 {% endblock content %}

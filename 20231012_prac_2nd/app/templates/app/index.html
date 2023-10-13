@@ -1,6 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+<p><img src="{% static "app/파이리.jfif" %}" alt="파이리1"></p>
+<hr>
+<hr>
+<p><img src="{% static "app/파이리2.jfif" %}" alt="파이리2"></p>
+<hr>
+<hr>
+<p><img src="{% static "리자몽1.jfif" %}" alt="리자몽1"></p>
+<hr>
+<hr>
+<p><img src="{% static "리자몽2.jfif" %}" alt="리자몽2"></p>
+<hr>
+<hr>
+<p><img src="{% static "app/리자몽1.jfif" %}" alt="app리자몽1"></p>
+<hr>
+<hr>
+<p><img src="{% static "app/리자몽2.jfif" %}" alt="app리자몽2"></p>
+<hr>
+<hr>
 <a href="{% url "app:create" %}">[CREATE]</a>
   {% for app in apps %}
   

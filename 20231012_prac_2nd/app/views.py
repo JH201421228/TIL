@@ -48,7 +48,8 @@ def detail(request, pk):
 
 def create(request):
     if request.method == 'POST':
-        form = AppForm(request.POST)
+        form = AppForm(request.POST, request.FILES)
+        print(request.FILES)
         if form.is_valid():
             app = form.save()
             return redirect('app:detail', app.pk)
@@ -57,7 +58,7 @@ def create(request):
     context = {
         'form':form
     }
-    return render(request, 'app/new.html', context)
+    return render(request, 'app/create.html', context)
 
 def delete(request, pk):
     app = App.objects.get(pk=pk)
