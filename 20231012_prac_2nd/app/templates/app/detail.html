@@ -3,7 +3,6 @@
 {% block content %}
   <h2>여기는 DETAIL이긴 한데...</h2>
   <p>{{ app.title }}</p>
-  <a href="{% url "app:index" %}">[back]</a>
   <hr>
   <hr>
   {% comment %} <a href="{% url "app:new" %}">[NEW]</a> {% endcomment %}
@@ -16,4 +15,31 @@
   <hr>
   <hr>
   <a href="{% url "app:update" app.pk %}">[EDIT]</a>
+
+  <hr>
+    <h1>댓글 목록</h1>
+    <ul>
+      {% for comment in comments %}
+        <li>
+          {{comment.content}}
+          <form action="{% url "app:comments_delete" app.pk comment.pk %}" method='POST'>
+            {% csrf_token %}
+            <input type="submit" value='delete'>
+          </form>
+        </li>
+      {% empty %}
+        <p>댓글이 없습니다.</p>
+      {% endfor %}
+    </ul>
+    <p>{{app.comment_set.count}}</p>
+    <p>{{comments|length}}</p>
+    <p>{{app.comment_set.all|length}}</p>
+  <hr>
+
+  <form action="{% url "app:comments_create" app.pk %}"  method='POST'>
+    {% csrf_token %}
+    {{commnet_form}}
+    <input type="submit">
+  </form>
+
 {% endblock content %}

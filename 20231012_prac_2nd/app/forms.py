@@ -1,5 +1,5 @@
 from django import forms
-from .models import App
+from .models import App, Comment
 
 # class AppForm(forms.Form):
 #     title = forms.CharField(max_length=100)
@@ -10,3 +10,8 @@ class AppForm(forms.ModelForm):
     class Meta:
         model = App
         fields = '__all__'
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)

@@ -2,6 +2,32 @@
 {% load static %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
+  <h1>당신 로그인 되어 있는거 알고 있지?</h1>
+{% else %}
+  <h1>당신 로그인 안 한거 알고 있지?</h1>
+{% endif %}
+<hr>
+<h1>로그인 하고 싶지?</h1>
+<hr>
+<a href="{% url "accounts:login" %}">Log In</a>
+<hr>
+<form action="{% url "accounts:logout" %}" method='POST'>
+  {% csrf_token %}
+  <input type="submit" value='Log Out'>
+</form>
+<hr>
+  <h1>당신은 {{user.username}}</h1>
+<hr>
+  <a href="{% url "accounts:signup" %}">계정 만들자</a>
+<hr>
+  <form action="{% url "accounts:delete" %}" method='POST'>
+    {% csrf_token %}
+    <input type="submit" value='회원탈퇴'>
+  </form>
+<hr>
+  <a href="{% url "accounts:update" %}">회원정보 수정</a>
+<hr>
 <p><img src="{% static "app/파이리.jfif" %}" alt="파이리1"></p>
 <hr>
 <hr>

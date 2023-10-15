@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import App
-from .forms import AppForm
+from .models import App, Comment
+from .forms import AppForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -12,8 +13,13 @@ def index(request):
 
 def detail(request, pk):
     app = App.objects.get(pk=pk)
+    comment_form = CommentForm()
+    comments = app.comment_set.all()
     context = {
-        'app':app
+        'app':app,
+        'commnet_form':comment_form,
+        'comments':comments,
+
     }
     return render(request, 'app/detail.html', context)
 
@@ -46,6 +52,7 @@ def detail(request, pk):
 #     }
 #     return render(request, 'app/new.html', context)
 
+@login_required
 def create(request):
     if request.method == 'POST':
         form = AppForm(request.POST, request.FILES)
@@ -60,6 +67,7 @@ def create(request):
     }
     return render(request, 'app/create.html', context)
 
+@login_required
 def delete(request, pk):
     app = App.objects.get(pk=pk)
     app.delete()
@@ -99,6 +107,7 @@ def delete(request, pk):
 #     }
 #     return render(request, 'app/edit.html', context)
 
+@login_required
 def update(request, pk):
     app = App.objects.get(pk=pk)
     if request.method == 'POST':
@@ -113,3 +122,22 @@ def update(request, pk):
         'form':form,
     }
     return render(request, 'app/update.html')
+
+def comments_create(request, pk):
+    app = App.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.app = app
+        comment_form.save()
+        return redirect('app:detail', app.pk)
+    context = {
+        'app':app,
+        'commnet_form':comment_form,
+    }
+    return render(request, 'app/detail.html', context)
+
+def comments_delete(request, app_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment.delete()
+    return redirect('app:detail', app_pk)
