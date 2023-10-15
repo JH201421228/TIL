@@ -50,6 +50,7 @@
   {% for app in apps %}
   
     <p>{{ app.pk }}</p>
+    <p>작성자 {{app.user}}</p>
     <a href="{% url "app:detail" app.pk %}">
       <p>{{ app.title }}</p>
     </a>

@@ -58,7 +58,9 @@ def create(request):
         form = AppForm(request.POST, request.FILES)
         print(request.FILES)
         if form.is_valid():
-            app = form.save()
+            app = form.save(commit=False)
+            app.user = request.user
+            app.save()
             return redirect('app:detail', app.pk)
     else:
         form = AppForm()
@@ -110,13 +112,16 @@ def delete(request, pk):
 @login_required
 def update(request, pk):
     app = App.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = AppForm(request.POST, instance=app)
-        if form.is_valid():
-            form.save()
-            return redirect('app:detail', app.pk)
+    if request.user == app.user:
+        if request.method == 'POST':
+            form = AppForm(request.POST, instance=app)
+            if form.is_valid():
+                form.save()
+                return redirect('app:detail', app.pk)
+        else:
+            form = AppForm(instance=app)
     else:
-        form = AppForm(instance=app)
+        return redirect('app:index')
     context = {
         'app':app,
         'form':form,

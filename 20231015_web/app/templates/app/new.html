@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>NEW</h1>
+<form action="{% url "app:create" %}" method='POST'>
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+{% endblock content %}

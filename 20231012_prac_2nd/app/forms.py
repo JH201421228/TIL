@@ -9,7 +9,7 @@ from .models import App, Comment
 class AppForm(forms.ModelForm):
     class Meta:
         model = App
-        fields = '__all__'
+        fields = ('title', 'content',)
 
 class CommentForm(forms.ModelForm):
     class Meta:
