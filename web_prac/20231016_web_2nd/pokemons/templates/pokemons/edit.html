@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>EDIT PAGE</h1>
+<hr>
+<hr>
+<p>오박사 : 새로운 정보를 알아냈군!!!</p>
+<form action="{% url "pokemons:update" pokemon.pk%}" method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}ss
+  {% comment %} <div>
+    <label for="name">이름 : </label>
+    <input type="text" name="name" id="name" value='{{pokemon.name}}'>
+  </div>
+  <div>
+    <label for="describe"></label>
+    <textarea name="describe" id="describe">{{pokemon.describe}}</textarea>
+  </div> {% endcomment %}
+  <input type="submit" value='수정하기'>
+</form>
+
+{% endblock content %}

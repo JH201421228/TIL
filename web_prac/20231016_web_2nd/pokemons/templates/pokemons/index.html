@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>INDEX PAGE</h1>
+<a href="{% url "pokemons:new" %}">[NEW]</a>
+<hr>
+<hr>
+{% for pokemon in pokemons %}
+  <p>포획한 순서 : {{pokemon.pk}}</p>
+  <p>포켓몬 이름 : {{pokemon.name}}</p>
+  <a href="{% url "pokemons:detail" pokemon.pk%}">[MORE]</a>
+  <hr>
+  <hr>
+{% endfor %}
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>NEW PAGE</p>
+<hr>
+<hr>
+<p>오박사 : 오오... 새로운 포켓몬을 잡다니. 자네 대단하구만!!!</p>
+<form action="{% url "pokemons:create" %}" method='POST'>
+  {% csrf_token %}
+  {{ pokemon.as_p }}
+  {% comment %} <div>
+    <label for="name">이름 : </label>
+    <input type="text" name='name' id='name' value='포켓몬의 이름은?'>
+  </div>
+  <div>
+    <label for="describe">설명 : </label>
+    <textarea name="describe" id="describe">포켓몬의 설명은?</textarea>
+  </div> {% endcomment %}
+  <input type="submit" value='등록하기'>
+</form>
+<a href="{% url "pokemons:index" %}">[GO to INDEX PAGE]</a>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>DETAIL</h1>
+<hr>
+<p> </p>
+<p>해당 포켓몬의 이름은 {{pokemon.title}}</p>
+<p>해당 포켓몬은 {{pokemon.content}} 이다!</p>
+<p> </p>
+<hr>
+<p>더 자세한 내용은 모험을 계속하며 알아보거라!</p>
+<hr>
+<form action="{% url "app:delete" pokemon.pk %}" method='POST'>
+  {% csrf_token %}
+  <p>이대로 해당 포켓몬을 야생에 풀어줄건가? 아쉽구만...</p>
+  <input type="submit" value='야생으로 놓아주기'>
+</form>
+<hr>
+<a href="{% url "app:edit" pokemon.pk%}">[EDIT]</a>
+<hr>
+<a href="{% url "app:index" %}">[BACK]</a>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>오오... 포켓몬에 수정할 정보가 있나보군!</h1>
+<form action="{% url "app:update" pokemon.pk%}" method='POST'>
+  {% csrf_token %}
+  <div>
+    <label for="title">Name : </label>
+    <input type="text" name='title' id='title' value='{{pokemon.title}}'>
+  </div>
+  <div>
+    <label for="content">What : </label>
+    <textarea name="content" id="content">{{pokemon.content}}</textarea>
+  </div>
+  <input type="submit" value='수정하기'>
+</form>
+
+{% endblock content %}

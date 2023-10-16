@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>DETAIL PAGE</h1>
+<hr>
+<hr>
+<p>오박사 : 자네, 포켓몬의 자세한 정보가 궁금한가 보군?</p>
+<hr>
+<p>포획한 순서 : {{pokemon.pk}}</p>
+<p>포켓몬 이름 : {{pokemon.name}}</p>
+<p>포켓몬 정보 : {{pokemon.describe}}</p>
+<p>포획한 날짜 : {{pokemon.catch_date}}</p>
+<hr>
+<p>오박사 : 포켓몬을 야생으로 보내줄 수 있다네.</p>
+<form action="{% url "pokemons:delete" pokemon.pk%}" method='POST'>
+  {% csrf_token %}
+  <input type="submit" value='야생으로 풀어주기'>
+</form>
+<hr>
+<form action="{% url "pokemons:edit" pokemon.pk%}" method='POST'>
+  {% csrf_token %}
+  <input type="submit" value='수정하기'>
+</form>
+<hr>
+<a href="{% url "pokemons:index" %}">[GO to INDEX PAGE]</a>
+{% endblock content %}
