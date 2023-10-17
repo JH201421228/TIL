@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>UPDATE PAGE</h1>
+<hr><hr>
+<form action="{% url "pokemon:update" pokemon.pk%}"method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='포켓몬의 정보가 새롭게 바뀝니다.'>
+  <hr><hr>
+  <a href="{% url "pokemon:detail" pokemon.pk%}">[Go to the DETAIL PAGE]</a>
+</form>
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>CREATE PAGE</h1>
+<hr><hr>
+<form action="{% url "pokemon:create" %}" method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='새로운 포켓몬 포획을 축하합니다.'>
+</form>
+{% endblock content %}

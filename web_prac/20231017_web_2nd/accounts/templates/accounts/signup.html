@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>SIGNUP PAGE</h1>
+<hr><hr>
+<form action="{% url "accounts:signup" %}"method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='계정을 생성합니다.'>
+</form>
+{% endblock content %}

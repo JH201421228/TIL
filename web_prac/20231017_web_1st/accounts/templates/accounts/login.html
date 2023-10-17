@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>LOG IN PAGE</h1>
+<form action="{% url "accounts:login" %}"method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='새로운 포켓몬 트레이너가 되었습니다.'>
+</form>
+
+{% endblock content %}

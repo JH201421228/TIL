@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>새로운 트레이너 등록을 환영합니다.</h1>
+<hr><hr>
+<form action="{% url "accounts:signup" %}"method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='이제부터 당신은 어엿한 한명의 트레이너 입니다.'>
+</form>
+
+{% endblock content %}
