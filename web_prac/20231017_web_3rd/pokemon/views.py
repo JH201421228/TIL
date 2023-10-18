@@ -55,3 +55,6 @@ def delete(request, pk):
     pokemon = Pokemon.objects.get(pk=pk)
     pokemon.delete()
     return redirect('pokemon:index')
+
+def comment_create(request, pk):
+    article = 
