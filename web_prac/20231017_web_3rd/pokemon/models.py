@@ -5,3 +5,10 @@ class Pokemon(models.Model):
     name = models.CharField(max_length=50)
     content = models.TextField()
     date = models.DateTimeField(auto_now=True)
+
+
+class Comment(models.Model):
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

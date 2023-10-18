@@ -17,4 +17,10 @@
 </form>
 <hr><hr>
 <a href="{% url "pokemon:index" %}">[Go to the INDEX PAGE]</a>
+<hr><hr>
+<form action="{% url "pokemon:comments_create" pokemon.pk %}"method='POST'>
+  {% csrf_token %}
+  {{comment_form}}
+  <input type="submit" value='댓글 작성'>
+</form>
 {% endblock content %}
