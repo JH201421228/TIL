@@ -36,4 +36,4 @@ def article_detail(request, article_pk):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    s
+    
