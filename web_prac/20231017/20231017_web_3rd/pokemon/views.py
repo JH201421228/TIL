@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Pokemon, Comment
 from .forms import PokemonForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request):
@@ -10,6 +11,7 @@ def index(request):
         'pokemons':pokemons
     }
     return render(request, 'pokemon/index.html', context)
+
 
 def detail(request, pk):
     pokemon = Pokemon.objects.get(pk=pk)
@@ -21,6 +23,7 @@ def detail(request, pk):
         'comments':comments,
     }
     return render(request, 'pokemon/detail.html', context)
+
 
 @login_required
 def create(request):
@@ -35,6 +38,7 @@ def create(request):
         'form':form
     }
     return render(request, 'pokemon/create.html', context)
+
 
 @login_required
 def update(request, pk):
@@ -52,11 +56,13 @@ def update(request, pk):
     }
     return render(request, 'pokemon/update.html', context)
 
+
 @login_required
 def delete(request, pk):
     pokemon = Pokemon.objects.get(pk=pk)
     pokemon.delete()
     return redirect('pokemon:index')
+
 
 @login_required
 def comment_create(request, pk):
@@ -89,3 +95,7 @@ def likes(request, pokemon_pk):
     else:
         pokemon.like_users.add(request.user)
     return redirect('pokemon:index')
+
+
+
+

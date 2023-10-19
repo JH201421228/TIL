@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import get_user_model
 from .models import User
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -77,3 +78,12 @@ def change_password(request, user_pk):
         'form':form
     }
     return render(request, 'accounts/change_password.html', context)
+
+
+def profile(request, username):
+    User = get_user_model()
+    person = User.objects.get(username=username)
+    context = {
+        'person':person,
+    }
+    return render(request, 'accounts/profile.html', context)

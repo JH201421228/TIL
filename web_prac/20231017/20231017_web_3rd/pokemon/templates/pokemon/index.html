@@ -8,6 +8,12 @@
   <p>Hello, {{user.username}}</p>
   <hr><hr>
 
+  <a href="{% url "accounts:profile" user.username%}">내 프로필</a>
+  <hr><hr>
+
+  <p>작성자 : <a href="{% url "accounts:profile" pokemon.user.username%}">{{pokemon.user}}</a></p>
+  <hr><hr>
+
   <a href="{% url "accounts:update" %}">[UPDATE]</a>
   <hr><hr>
 
