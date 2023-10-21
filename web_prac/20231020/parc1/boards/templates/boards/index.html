@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<p>Hello, {{user.username}}</p>
+<a href="{% url "accounts:profile" user.username%}">[MY PROFILE]</a>
+<hr>
+<form action="{% url "accounts:logout" %}" mathod='POST'>
+  {% csrf_token %}
+  <input type="submit" value='LOGOUT'>
+</form>
+<hr>
+<form action="{% url "accounts:delete" %}" mathod='POST'>
+  {% csrf_token %}
+  <input type="submit" value='ACCOUNT DELETE'>
+</form>
+<hr>
+
+<div>
+  <div class="d-flex justify-content-between">
+    <h1 class="mb-4">메인 페이지</h1>
+    <a style="height: 70%;" href="{% url 'boards:create' %}"><button class="btn btn-info">생성하기</button></a>
+  </div>
+  {% if boards|length == 0 %}아직 게시글이 없습니다
+  {% else %}
+  {% for board in boards %}
+    <p>글번호 : {{ board.id }}</p>  
+    <p>글제목 : <a href="{% url 'boards:detail' board.id %}" style="text-decoration: none;">{{ board.title }}</a></p>
+    <p>작성자 : <a href="{% url "accounts:profile" board.author.username%}">{{board.author.username}}</a></p>
+    {% comment %} <form action="{% url "boards:likes" board.id%}" method='POST'>
+      {% csrf_token %}
+      {% if request.user in board.like_users.all %}
+        <input type="submit" value='❤'>
+      {% else %}
+        <input type="submit" value='🤍'>
+      {% endif %}
+    </form> {% endcomment %}
+    <form action="{% url "boards:likes" board.id%}"method='POST'>
+      {% csrf_token %}
+      {% if request.user in board.like_users.all %}
+        <input type="submit" value='❤'>
+      {% else %}
+        <input type="submit" value='🤍'>
+      {% endif %}
+    </form>
+    <hr>
+  {% endfor %}
+  {% endif %}
+</div>
+
+{% else %}
+<a href="{% url "accounts:login" %}">[LOGIN]</a>
+<hr>
+<a href="{% url "accounts:signup" %}">[SIGNUP]</a>
+<hr>
+{% endif %}
+{% endblock content %}
+
+

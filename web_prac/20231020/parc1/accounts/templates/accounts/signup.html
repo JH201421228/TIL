@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>SIGNUP PAGE</h1>
+<hr><hr>
+<form action="{% url "accounts:signup" %}"method='POST'>
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value='가입을 환영합니다.'>
+</form>
+<hr><hr>
+<a href="{% url "boards:index" %}">[BACK]</a>
+{% endblock content %}
