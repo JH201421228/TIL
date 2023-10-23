@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div></div>
+  <script>
+    const divTag = document.querySelector('div')
+    const h1Tag = document.createElement('h1')
+    console.log(h1Tag)
+
+    h1Tag.textContent = '제목입니다.'
+    console.log(h1Tag)
+
+    divTag.appendChild(h1Tag)
+
+    divTag.removeChild(h1Tag)
+    // divTag.toggleAttribute(h1Tag)
+  </script>
+</body>
+
+</html>
