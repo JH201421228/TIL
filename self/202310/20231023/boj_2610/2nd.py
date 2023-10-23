@@ -30,10 +30,6 @@ for _ in range(M):
     start, end = map(int, input().split())
     graph[start][end] = graph[end][start] = 1
 
-# for inner in graph[1:]:
-#     print(inner[1:])
-# print('-------------------------')
-
 for k in range(1, N+1):
     for i in range(1, N+1):
         for j in range(1, N+1):
@@ -42,36 +38,23 @@ for k in range(1, N+1):
             elif graph[i][j] > graph[i][k] + graph[k][j]:
                 graph[i][j] = graph[i][k] + graph[k][j]
 
-
 for i in range(1, N+1):
     for j in range(1, N+1):
         if graph[i][j] == float('inf'):
             graph[i][j] = 0
-
-# for inner in graph[1:]:
-#     print(inner[1:])
-# print('-------------------------')
 
 visit = [0] * (N+1)
 ans = []
 for i in range(1, N+1):
     if not visit[i]:
         ans.append(party_maker(i))
-# print(ans)
-# for inner in ans:
-#     max_val = 0
-#     for i in inner:
-#         for j in inner:
-#             max_val = max(max_val, graph[i][j], graph[j][i])
 
-# print(check)
 print(len(ans))
 for inner in ans:
     temp = []
     for num in inner:
         temp.append(max(graph[num][1:]))
     if len(temp) > 1:
-        # print(temp)
         print(inner[temp.index(min(temp))])
     else:
         print(*inner)
