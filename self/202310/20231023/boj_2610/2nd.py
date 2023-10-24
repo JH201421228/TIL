@@ -50,12 +50,16 @@ for i in range(1, N+1):
         ans.append(party_maker(i))
 
 print(len(ans))
+<<<<<<< HEAD
 ans_list = []
+=======
+>>>>>>> 40c748c092dc8a38b4d611c4e02b545d680cdf24
 for inner in ans:
     temp = []
     for num in inner:
         temp.append(max(graph[num][1:]))
     if len(temp) > 1:
+<<<<<<< HEAD
         ans_list.append(inner[temp.index(min(temp))])
     else:
         ans_list.append(*inner)
@@ -63,3 +67,8 @@ for inner in ans:
 ans_list.sort()
 for num in ans_list:
     print(num)
+=======
+        print(inner[temp.index(min(temp))])
+    else:
+        print(*inner)
+>>>>>>> 40c748c092dc8a38b4d611c4e02b545d680cdf24
