@@ -1,44 +1,25 @@
 <template>
-  <div>
-    <header>
-      <h1>명함 관리 페이지</h1>
-    </header>
-
-    <main>
-      <p>명함을 관리하는 페이지입니다. 여기에 명함 목록이 표시됩니다.</p>
-    </main>
-
-    <article>
-      <h2>보유 명함 목록</h2>
-      <BusinessCard />
-    </article>
-
-    <footer>
-      <p>(c) 2023 My Business Cards</p>
-    </footer>
+  <div id="app">
+    <ChatBox />
   </div>
 </template>
 
-<script setup>
+<script>
+import ChatBox from './components/ChatBox.vue';
 
-  import BusinessCard from './components/BusinessCard.vue';
-
+export default {
+  name: 'App',
+  components: {
+    ChatBox
+  }
+}
 </script>
 
-<style scoped>
-  div{
-    text-align: center;
-  }
-  header{
-    background-color: cornflowerblue;
-    color: white;
-    width: 40%;
-    margin: auto;
-    padding: 1px;
-  }
-  footer{
-    position: relative;
-    bottom: 0;
-    background-color: aliceblue;
-  }
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>

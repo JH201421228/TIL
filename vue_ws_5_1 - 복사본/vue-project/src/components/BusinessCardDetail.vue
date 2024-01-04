@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h3>이름 : {{ cardName }}</h3>
-        <p>직함 : {{ cardTitle }}</p>
+        <h3>{{ cardName }}</h3>
+        <p>{{ cardTitle }}</p>
         <button @click="deleteCardFunc">명함 삭제</button>
     </div>
 </template>
