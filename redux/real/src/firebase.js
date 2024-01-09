@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -7,6 +8,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyCWLDcyVXnnsX73czz0D7inUusW-vYXElU",
   authDomain: "react-chat-app-57803.firebaseapp.com",
+  databaseURL: "https://react-chat-app-57803-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "react-chat-app-57803",
   storageBucket: "react-chat-app-57803.appspot.com",
   messagingSenderId: "216229125089",
@@ -15,5 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const db = getDatabase(app)
 
 export default app
