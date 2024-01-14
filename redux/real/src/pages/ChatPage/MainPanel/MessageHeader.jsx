@@ -3,7 +3,7 @@ import { Col, FormControl, FormGroup, Image, InputGroup, Row } from 'react-boots
 import { useSelector } from 'react-redux'
 import {AiOutlineSearch} from 'react-icons/ai'
 
-const MessageHeader = () => {
+const MessageHeader = ({handleSearchChange}) => {
 
   const {currentChatRoom} = useSelector(state => state.chatRoom)
 
@@ -27,7 +27,7 @@ const MessageHeader = () => {
               <AiOutlineSearch />
             </InputGroup.Text>
             <FormControl
-              onChange
+              onChange={handleSearchChange}
               placeholder='Search Messages'
             />
           </InputGroup>
