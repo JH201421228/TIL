@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Col, FormControl, FormGroup, Image, InputGroup, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import {AiOutlineSearch} from 'react-icons/ai'
+import { FaLock, FaLockOpen } from 'react-icons/fa'
+import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
+import { child, ref, update, remove } from 'firebase/database'
+import { db } from '../../../firebase'
 
 const MessageHeader = ({handleSearchChange}) => {
 
   const {currentChatRoom} = useSelector(state => state.chatRoom)
+  const {isPrivateChatRoom} = useSelector(state => state.chatRoom)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const usersRef = ref(db, 'users')
+
+  const {currentUser} = useSelector(state => state.user) 
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      setIsFavorite(false)
+      remove(child(usersRef, `${currentUser.uid}/favorite/${currentChatRoom.id}`))
+    }
+    else {
+      setIsFavorite(true)
+      update(child(usersRef, `${currentUser.uid}/favorite`), {
+        
+      })
+    }
+  }
 
   return (
     <div
@@ -20,6 +42,23 @@ const MessageHeader = ({handleSearchChange}) => {
     >
       <Row>
         <Col>
+        <h2>
+          {isPrivateChatRoom
+          ? <FaLock style={{marginBottom: 10}} />
+          : <FaLockOpen style={{marginBottom: 10}} />
+          }
+          {' '}
+          <span>{currentChatRoom?.name}</span>
+          {' '}
+          {!isPrivateChatRoom &&
+          <span style={{cursor: 'pointer'}} onClick={handleFavorite}>
+            {isFavorite
+            ? <MdFavorite style={{marginBottom: 10}} />
+            : <MdFavoriteBorder style={{marginBottom: 10}} />
+            }
+          </span>
+          }
+        </h2>
         </Col>
         <Col>
           <InputGroup>
@@ -33,6 +72,7 @@ const MessageHeader = ({handleSearchChange}) => {
           </InputGroup>
         </Col>
       </Row>
+      {!isPrivateChatRoom &&      
       <div style={{display: 'flex', justifyContent: 'flex-end'}}>
         <Image
           roundedCircle
@@ -42,6 +82,7 @@ const MessageHeader = ({handleSearchChange}) => {
         {" "}
         <p>{currentChatRoom?.createdBy.name}</p>
       </div>
+      }
     </div>
   )
 }

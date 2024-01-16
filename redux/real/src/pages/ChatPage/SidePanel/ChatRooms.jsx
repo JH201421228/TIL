@@ -4,7 +4,7 @@ import {FaPlus, FaRegSmileWink} from 'react-icons/fa'
 import {child, ref as dbRef, off, onChildAdded, push, update} from 'firebase/database'
 import {db} from '../../../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentChatRoom } from '../../../store/chatRoomSlice'
+import { setCurrentChatRoom, setPrivateChatRoom } from '../../../store/chatRoomSlice'
 
 const ChatRooms = () => {
   const [show, setShow] = useState(false)
@@ -76,6 +76,7 @@ const ChatRooms = () => {
 
   const changeChatRoom = (room) => {
     dispatch(setCurrentChatRoom(room))
+    dispatch(setPrivateChatRoom(false))
     setActiveChatRoomId(room.id)
   }
 
