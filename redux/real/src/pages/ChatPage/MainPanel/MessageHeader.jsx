@@ -24,7 +24,14 @@ const MessageHeader = ({handleSearchChange}) => {
     else {
       setIsFavorite(true)
       update(child(usersRef, `${currentUser.uid}/favorite`), {
-        
+        [currentChatRoom] : {
+          name: currentChatRoom.name,
+          description: currentChatRoom.description,
+          createdBy: {
+            name: currentChatRoom.createdBy.name,
+            image: currentChatRoom.createdBy.image
+          }
+        }
       })
     }
   }
