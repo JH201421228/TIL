@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, FormControl, FormGroup, Image, InputGroup, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import {AiOutlineSearch} from 'react-icons/ai'
 import { FaLock, FaLockOpen } from 'react-icons/fa'
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
-import { child, ref, update, remove } from 'firebase/database'
+import { child, ref, update, remove, onValue } from 'firebase/database'
 import { db } from '../../../firebase'
 
 const MessageHeader = ({handleSearchChange}) => {
@@ -15,6 +15,21 @@ const MessageHeader = ({handleSearchChange}) => {
   const usersRef = ref(db, 'users')
 
   const {currentUser} = useSelector(state => state.user) 
+
+  useEffect(() => {
+
+
+  })
+
+  const addFavoriteListener = (chatRoomId, userId) => {
+    onValue(child(usersRef, `${userId}/favortie`), data => {
+      if (data.val() !== null) {
+        const chatRoomIds = Object.keys(data.val())
+        const isAlreadyFavorite = chatRoomIds.includes(chatRoomId)
+        setIsFavorite(isAlreadyFavorite)
+      }
+    })
+  }
 
   const handleFavorite = () => {
     if (isFavorite) {
