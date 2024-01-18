@@ -17,12 +17,14 @@ const MessageHeader = ({handleSearchChange}) => {
   const {currentUser} = useSelector(state => state.user) 
 
   useEffect(() => {
-
-
-  })
+    if (currentChatRoom?.id && currentUser?.uid) {
+      addFavoriteListener(currentChatRoom.id, currentUser.uid)
+    }
+  
+  }, [currentChatRoom?.id, currentUser?.uid])
 
   const addFavoriteListener = (chatRoomId, userId) => {
-    onValue(child(usersRef, `${userId}/favortie`), data => {
+    onValue(child(usersRef, `${userId}/favorite`), data => {
       if (data.val() !== null) {
         const chatRoomIds = Object.keys(data.val())
         const isAlreadyFavorite = chatRoomIds.includes(chatRoomId)
@@ -39,7 +41,7 @@ const MessageHeader = ({handleSearchChange}) => {
     else {
       setIsFavorite(true)
       update(child(usersRef, `${currentUser.uid}/favorite`), {
-        [currentChatRoom] : {
+        [currentChatRoom.id] : {
           name: currentChatRoom.name,
           description: currentChatRoom.description,
           createdBy: {
