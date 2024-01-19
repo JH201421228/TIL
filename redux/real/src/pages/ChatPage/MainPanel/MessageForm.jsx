@@ -1,4 +1,4 @@
-import { child, push, set, ref as dbRef, serverTimestamp } from 'firebase/database'
+import { child, push, set, ref as dbRef, serverTimestamp, remove } from 'firebase/database'
 import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { db } from '../../../firebase'
@@ -135,6 +135,18 @@ const MessageForm = () => {
     );
   }
 
+  const handleChange = (event) => {
+    setContent(event.target.value)
+   
+    if (event.target.value) {
+      set(dbRef(db, `typing/${currentChatRoom.id}/${currentUser.uid}`), {
+        userUid: currentUser.displayName
+      })
+    }
+    else {
+      remove(dbRef(db, `typing/${currentChatRoom.id}/${currentUser.uid}`))
+    }
+  }
 
   return (
     <div>
@@ -142,7 +154,7 @@ const MessageForm = () => {
         <textarea
           style={{width: '100%', height: 90, border: '0.2rem solid rgb(235, 236, 236), borderRadius: 4'}}
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={handleChange}
         />
 
           {

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import MessageHeader from './MessageHeader'
 import MessageForm from './MessageForm'
-import { child, onChildAdded, ref as dbRef, off } from 'firebase/database'
+import { child, onChildAdded, ref as dbRef, off, DataSnapshot, onChildRemoved } from 'firebase/database'
 import { db } from '../../../firebase'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from './Message'
+import { setUserPosts } from '../../../store/chatRoomSlice'
 
 
 const MainPanel = () => {
 
   const messagesRef = dbRef(db, 'messages')
+  const typingRef = dbRef(db, 'typing')
 
   const [messages, setMessages] = useState([])
   const [messagesLoading, setMessagesLoading] = useState(true)
@@ -17,6 +19,8 @@ const MainPanel = () => {
   const [searchResults, setSearchResults] = useState([])
   const [searchLoading, setSearchLoading] = useState(false)
   
+  const [typingUsers, setTypingUsers] = useState([])
+
   const {currentUser} = useSelector(state => state.user)
   const {currentChatRoom} = useSelector(state => state.chatRoom)
   const dispatch = useDispatch()
@@ -24,11 +28,30 @@ const MainPanel = () => {
   useEffect(() => {
     if (currentChatRoom.id) {
       addMessagesListener(currentChatRoom.id)
+      addTypingListeners(currentChatRoom.id)
     }
     return () => {
       off(messagesRef)
     }
   }, [currentChatRoom.id])
+
+  const addTypingListeners = (chatRoomId) => {
+    let typingUsers = []
+    onChildAdded(child(typingRef, chatRoomId), DataSnapshot => {
+      typingUsers = typingUsers.concat({
+        id: DataSnapshot.key,
+        name: DataSnapshot.val()
+      })
+      setTypingUsers(typingUsers)
+    })
+    onChildRemoved(child(typingRef, chatRoomId), DataSnapshot => {
+      const index = typingUsers.findIndex(user => user.id === DataSnapshot.key)
+      if (index !== -1) {
+        typingUsers = typingUsers.filter(user => user.id !== DataSnapshot.key)
+        setTypingUsers(typingUsers)
+      }
+    })
+  }
 
   const handleSearchMessage = (searchTerm) => {
     const chatRoomMessages = [...messages]
@@ -57,6 +80,7 @@ const MainPanel = () => {
 
   const addMessagesListener = (chatRoomId) => {
     let messagesArray = []
+    setMessages([])
 
     onChildAdded(child(messagesRef, chatRoomId), DataSnapshot => {
       messagesArray.push(DataSnapshot.val())
@@ -64,7 +88,24 @@ const MainPanel = () => {
 
       setMessages(newMessageArray)
       setMessagesLoading(false)
+      userPostsCount(newMessageArray)
     })
+  }
+
+  const userPostsCount = (messages) => {
+    const userPosts = messages.reduce((acc, message) => {
+      if (message.user.name in acc) {
+        acc[message.user.name].count += 1
+      }
+      else {
+        acc[message.user.name] = {
+          image: message.user.image,
+          count: 1
+        }
+      }
+      return acc
+    }, {})
+    dispatch(setUserPosts(userPosts))
   }
 
   const renderMessages = (messages) => {
@@ -78,6 +119,17 @@ const MainPanel = () => {
           />
         )
       })
+    )
+  }
+
+  const renderTypingUsers = (typingUsers) => {
+    return (
+      typingUsers.length > 0 &&
+      typingUsers.map(user => (
+        <span key={user.name.userUid}>
+          {user.name.userUid} 님이 채팅을 입력하고 있습니다...
+        </span>
+      ))
     )
   }
 
@@ -100,6 +152,7 @@ const MainPanel = () => {
             :
             renderMessages(messages)
         }
+        {renderTypingUsers(typingUsers)}
       </div>
       <MessageForm />
     </div>

@@ -2,12 +2,16 @@ import { DataSnapshot, child, off, onChildAdded, onChildRemoved, ref } from 'fir
 import React, { useEffect, useState } from 'react'
 import { FaRegSmileBeam } from 'react-icons/fa'
 import { db } from '../../../firebase'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentChatRoom, setPrivateChatRoom } from '../../../store/chatRoomSlice'
 
 const Favorite = () => {
   
   const {currentUser} = useSelector(state => state.user)
   const [favoriteChatRooms, setFavoriteChatRooms] = useState([])
+
+  const dispatch = useDispatch()
+  const [activeChatRoomId, setActiveChatRoomId] = useState('')
 
   useEffect(() => {
     if (currentUser?.uid) {
@@ -40,12 +44,19 @@ const Favorite = () => {
     })
   }
 
+  const changeChatRoom = (room) => {
+    dispatch(setCurrentChatRoom(room))
+    dispatch(setPrivateChatRoom(false))
+    setActiveChatRoomId(room.id)
+  }
+
   const renderFavoriteChatRooms = (favoriteChatRooms) => {
     return(
       favoriteChatRooms.length > 0 &&
       favoriteChatRooms.map(chatRoom =>
         <li
           key={chatRoom.id}
+          onClick={() => {changeChatRoom(chatRoom)}}
         >
           # {chatRoom.name}
         </li>
