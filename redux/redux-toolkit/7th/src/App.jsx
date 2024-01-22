@@ -1,15 +1,16 @@
-
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Counter from './counter/counter'
-import Todos from './todos/todos'
+import Test from './test_page'
+import Main from './main_page'
 
 function App() {
 
   return (
     <>
-      <Counter />
-      <hr />
-      <Todos />
+      <Routes>
+        <Route path='/test' element={<Test />} />
+        <Route path='/' element={<Main />} />
+      </Routes>
     </>
   )
 }

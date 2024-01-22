@@ -4,7 +4,8 @@ input = sys.stdin.readline
 from collections import deque
 
 def bfs():
-
+    if S == G:
+        return 0
     q = deque([S])
     while q:
         now = q.popleft()
