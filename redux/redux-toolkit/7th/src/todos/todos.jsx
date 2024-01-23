@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./todosSlice";
+import { addTodo, removeTodo } from "./todosSlice";
 
 const Todos = () => {
 
@@ -26,7 +26,10 @@ const Todos = () => {
         return (
             <ul>
                 {todoList.map((todo, index) => (
-                    <li key={index}>{todo}</li>
+                    <li key={index}>
+                        {todo}
+                        <button onClick={() => dispatch(removeTodo(index))}>-</button>
+                    </li>
                 ))}
             </ul>
         )
