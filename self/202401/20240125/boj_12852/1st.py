@@ -17,6 +17,8 @@ for idx in range(2, N+1):
     if not idx % 2 and memo[idx//2]+1 < memo[idx]:
         memo[idx] = memo[idx//2] + 1
         pre = idx//2
+
+
     ans[idx] = [idx] + ans[pre]
 
 print(memo[N])
