@@ -1,7 +1,7 @@
 import sys
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
-sys.setrecursionlimit(1000000)
+from collections import deque
 
 N, M = map(int, input().split())
 S, E = map(int, input().split())
@@ -44,16 +44,18 @@ for a, b, c in graph:
 
 visited = [0 for _ in range(N+1)]
 visited[S] = 1
-def dfs(now, val):
+q = deque([(S, float('inf'))])
+ans = 0
+
+while q:
+    now, now_weight = q.popleft()
     if now == E:
-        print(val)
-        exit(0)
-    for next, cost in way[now]:
+       ans = now_weight
+       break
+    for next, weight in way[now]:
         if not visited[next]:
+            now_weight = min(now_weight, weight)
+            q.append((next, now_weight))
             visited[next] = 1
-            dfs(next, min(cost, val))
-            visited[next] = 0
 
-
-dfs(S, float('inf'))
-
+print(ans)
