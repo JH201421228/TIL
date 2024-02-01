@@ -5,16 +5,22 @@ input = sys.stdin.readline
 
 N, M = map(int, input().split())
 graph = []
-for _ in range(N - M + 1):
+for _ in range(N):
     graph.append(tuple(map(int, input().split())))
 parent = [i for i in range(N+1)]
+already = []
+
 for _ in range(M):
     a, b = map(int, input().split())
-    parent[max(a, b)] = min(a, b)
+    already.append((min(a, b), max(a, b)))
+already.sort(key=lambda x: (-x[0]))
 
-way = [(0, 0, float('inf'))]
-for i in range(N-M+1):
-    for j in range(i+1, N-M+1):
+# print(already)
+way = []
+for i in range(N):
+    for j in range(i+1, N):
+        if (i+1, j+1) in already:
+            way.append((i+1, j+1, float('inf')))
         way.append((i+1, j+1, ((graph[i][0]-graph[j][0])**2+(graph[i][1]-graph[j][1])**2)**0.5))
 way.sort(key=lambda x: x[2])
 # print(way)
@@ -38,6 +44,10 @@ def same_parent(x, y):
     return find_parent(x) == find_parent(y)
 
 
+for a, b in already:
+    if not same_parent(a, b):
+        union_parent(a, b)
+
 ans = 0
 for a, b, c in way:
     if not same_parent(a, b):
@@ -45,4 +55,4 @@ for a, b, c in way:
         ans += c
 
 
-print(f'{ans:.2f}')
+print(format(ans, ".2f"))
