@@ -32,7 +32,7 @@ while lines:
         if preb < innerb:
             preb = innerb
             check = 1
-        
+
 
     if preb >= M:
         print(ans)
