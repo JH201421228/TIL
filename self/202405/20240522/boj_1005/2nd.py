@@ -9,13 +9,29 @@ from collections import deque
 for _ in range(int(input())):
     N, K = map(int, input().split())
     Ds = list(map(int, input().split()))
-    order_dict = {} # 차수를 보여주는 딕셔너리
+    order_dict = dict() # 차수를 보여주는 딕셔너리
     order_list = [[] for _ in range(N + 1)]  # 순서 의존도를 정의하는 배열
     start_point = [True] * (N+1)
     for _ in range(K):
         s, e = map(int, input().split())
-        start_point[s] = False
-        order_dict[s] = order_dict.get(s, 0) + 1
+        start_point[e] = False
+        order_dict[e] = order_dict.get(e, 0) + 1
         order_list[s].append(e)
+    goal = int(input())
+    # print(start_point, order_dict, order_list, goal)
 
-    print(start_point, order_dict, order_list)
+    weight = [0] * (N+1)
+    q = deque([])
+    for idx in range(N+1):
+        if start_point[idx]:
+            q.append(idx)
+
+    while q:
+        now = q.popleft()
+        for next in order_list[now]:
+            weight[next] = max(weight[next], weight[now] + Ds[now-1])
+            order_dict[next] = order_dict.get(next) - 1
+            if not order_dict[next]:
+                q.append(next)
+    # print(weight)
+    print(weight[goal] + Ds[goal-1])
