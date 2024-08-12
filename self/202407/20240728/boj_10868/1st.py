@@ -37,6 +37,3 @@ I(1, N, 1)
 for _ in range(M):
     a, b = map(int, input().split())
     print(S(1, N, a, b, 1))
-
-print(nums)
-print(st)
