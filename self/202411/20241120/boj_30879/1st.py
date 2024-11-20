@@ -33,10 +33,13 @@ done = False
 
 for _ in range(N):
     temp = list(map(int, input().split()))
+    D = []
 
     if temp[0] == 1:
         G[-temp[1]].append(temp[2])
         G[-temp[2]].append(temp[1])
+        D.append(temp[1])
+        D.append(temp[2])
     else:
         if not done:
             V = [0] * (200_001)
@@ -44,11 +47,11 @@ for _ in range(N):
             S = []
             O = 0
             cnt = 0
-            for i in range(-100_000, 100_001):
+            for i in D:
                 if i and not V[i]:
                     scc(i)
 
-            for i in range(1, 100_001):
+            for i in D:
                 if F[i] and F[i] == F[-i]:
                     done = True
                     print('NO DINNER')
