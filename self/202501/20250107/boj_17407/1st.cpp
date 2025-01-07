@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-int M, V, arr[100001], T[400001], lazy[400001];
+int N, M, V, ans, arr[100001], T[400001], lazy[400001];
 string S;
 
 int I(int s, int e, int idx) {
@@ -21,8 +21,8 @@ void lazy_U(int s, int e, int idx) {
     if (lazy[idx]) {
         T[idx] += lazy[idx];
         if (s != e) {
-            lazy[idx<<1] = lazy[idx];
-            lazy[idx<<1|1] = lazy[idx];
+            lazy[idx<<1] += lazy[idx];
+            lazy[idx<<1|1] += lazy[idx];
         }
         lazy[idx] = 0;
     }
@@ -43,8 +43,7 @@ int U(int s, int e, int idx, int l, int r, int v) {
 
     int mid = (s+e) >> 1;
 
-    U(s, mid, idx<<1, l, r, v);
-    U(mid+1, e, idx<<1|1, l, r, v);
+    T[idx] = min(U(s, mid, idx<<1, l, r, v), U(mid+1, e, idx<<1|1, l, r, v));
 
     return T[idx];
 }
@@ -65,13 +64,31 @@ int main() {
         }
     }
 
-    V = arr[S.size()-1];
+    N = S.size();
+    V = arr[N];
 
-    I(1, S.size(), 1);
+    I(1, N, 1);
 
     for (int i = 0; i < M; ++i) {
-        int q; cin >> q;
+        int q, k; cin >> q;
+        
+        if (S[q-1] == '(') {
+            S[q-1] = ')';
+            V -= 2;
+            k = U(1, N, 1, q, N, -2);
+        }
+        else {
+            S[q-1] = '(';
+            V += 2;
+            k = U(1, N, 1, q, N, 2);
+        }
+
+        if (!V && k >= 0) {
+            ans += 1;
+        }
     }
+
+    cout << ans << '\n';
 
     return 0;
 }
