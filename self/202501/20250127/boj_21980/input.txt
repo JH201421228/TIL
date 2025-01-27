@@ -1,0 +1,11 @@
+5
+4 3
+AtY YtA aTy Ayt
+4 4
+AAaa AaAa aaAA AaaA
+5 4
+AAAA aaaa AAaa AAAa Aaaa
+10 1
+A a B b C c D d E e
+2 10
+ABCDEabcde abcdeEDCBA
