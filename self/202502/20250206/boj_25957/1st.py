@@ -16,7 +16,7 @@ def refineString(words):
             temp.append(ord(ww))
         temp.sort()
         temp = [str(x).zfill(3) for x in temp]
-        
+
         s += str(''.join(temp))
         s += str(w[-1])
 
