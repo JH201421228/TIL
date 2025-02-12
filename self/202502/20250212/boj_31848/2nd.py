@@ -27,9 +27,9 @@ def binary_search(n):
         mid = (s+e) >> 1
 
         if sieve[mid] < n:
-            s = mid+1
+            s += 1
         else:
-            e = mid-1
+            e -= 1
 
     return s
 
@@ -44,9 +44,16 @@ sieve, order, cnt = Sieve(H)
 Q = int(input())
 S = list(map(int, input().split()))
 
+q = [0] * 100_001
+
 ans = []
 
 for n in S:
-    ans.append(order[binary_search(n)]+1)
+    if q[n]:
+        ans.append(q[n])
+    else:
+        temp = order[binary_search(n)]+1
+        ans.append(temp)
+        q[n] = temp
 
 print(*ans)
