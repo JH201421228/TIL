@@ -18,7 +18,7 @@ def scc(n):
     if p == V[n]:
         cnt += 1
         while S:
-
+            S.pop()
 
     return p
 
