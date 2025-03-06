@@ -42,5 +42,5 @@ for idx in range(-4_000, 4_001):
 
 print(round(sum_n / N))
 print(heapq.heappop(h))
-print(idx)
+print(mid)
 print(max_n - min_n)
