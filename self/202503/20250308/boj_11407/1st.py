@@ -1,0 +1,84 @@
+import sys
+from collections import deque
+sys.stdin = open('input.txt')
+input = sys.stdin.readline
+
+
+N, M = map(int, input().split())
+
+src, sink, nodes = N+M+1, N+M+2, N+M+3
+
+G = [[] for _ in range(nodes)]
+F = [[0] * nodes for _ in range(nodes)]
+C = [[0] * nodes for _ in range(nodes)]
+D = [[0] * nodes for _ in range(nodes)]
+
+temp = list(map(int, input().split()))
+for u in range(M+1, N+M+1):
+    G[u].append(sink)
+    G[sink].append(u)
+    C[u][sink] = temp[u-M-1]
+
+temp = list(map(int, input().split()))
+for u in range(1, M+1):
+    G[src].append(u)
+    G[u].append(src)
+    C[src][u] = temp[u-1]
+
+for u in range(1, M+1):
+    temp = list(map(int, input().split()))
+    for v in range(M+1, N+M+1):
+        G[u].append(v)
+        G[v].append(u)
+        C[u][v] = temp[v-M-1]
+
+for u in range(1, M+1):
+    temp = list(map(int, input().split()))
+    for v in range(M+1, N+M+1):
+        D[u][v] = temp[v-M-1]
+        D[v][u] = -temp[v-M-1]
+
+ans = 0
+
+while True:
+    pre, dist, checker = [-1] * nodes, [float("inf")] * nodes, [0] * nodes
+    q = deque([src])
+    checker[src] = 1
+    dist[src] = 0
+
+    while q:
+        n = q.popleft()
+        checker[n] = 0
+
+        for x in G[n]:
+            if C[n][x] > F[n][x] and dist[x] > dist[n] + D[n][x]:
+                dist[x] = dist[n] + D[n][x]
+                pre[x] = n
+
+                if not checker[x]:
+                    checker[x] = 1
+                    q.append(x)
+
+    if pre[sink] == -1:
+        break
+
+    flow = float("inf")
+    n = sink
+    while n != src:
+        flow = min(flow, C[pre[n]][n])
+        n = pre[n]
+
+    n = sink
+    while n != src:
+        F[pre[n]][n] += flow
+        F[n][pre[n]] -= flow
+        ans += (D[pre[n]][n] * flow)
+        n = pre[n]
+
+cnt = 0
+
+for idx in range(M+1, N+M+1):
+    cnt += F[idx][sink]
+
+print(cnt)
+print(ans)
