@@ -19,7 +19,7 @@ for idx in range(N, 1, -1):
     if len(G[idx]) == idx - 1 + least:
         least += 1
         ans.append('E')
-    elif not G[idx]:
+    elif len(G[idx]) == least:
         ans.append('N')
     else:
         isPossible = False
