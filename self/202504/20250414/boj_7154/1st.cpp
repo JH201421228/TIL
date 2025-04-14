@@ -34,7 +34,7 @@ int main() {
             C[src][u] = 1;
             G[src].emplace_back(u); G[u].emplace_back(src);
 
-            int temp[4]; for (int idx = 0; idx < 5; ++idx) cin >> temp[idx];
+            int temp[5]; for (int idx = 0; idx < 5; ++idx) cin >> temp[idx];
             for (int idx = 1; idx < 5; ++idx) {
                 int v = temp[idx]+1+M;
                 G[u].emplace_back(v); G[v].emplace_back(u);
@@ -44,11 +44,34 @@ int main() {
         }
 
         while (true) {
-            
-        }
-    }
+            fill(pre, pre+sink+1, -1);
+            fill(dist, dist+sink+1, 1e9);
+            fill(checker, checker+sink+1, 0);
 
-    // cout << satisfaction[1][3] << '\n';
+            queue<int> q; q.push(src); dist[src] = 0; checker[src] = 1;
+
+            while (!q.empty()) {
+                int n = q.front(); q.pop(); checker[n] = 0;
+
+                for (auto& x : G[n]) {
+                    if (C[n][x] > F[n][x] && dist[x] > dist[n] +D[n][x]) {
+                        dist[x] = dist[n] + D[n][x]; pre[x] = n;
+                        if (!checker[x]) {
+                            q.push(x); checker[x] = 1;
+                        }
+                    }
+                }
+            }
+
+            if (pre[sink] == -1) break;
+
+            for (int n = sink; n != src; n = pre[n]) {
+                F[pre[n]][n]++; F[n][pre[n]]--; ans += D[pre[n]][n];
+            }
+        }
+        
+        cout << -ans << '\n';
+    }
 
     return 0;
 }
