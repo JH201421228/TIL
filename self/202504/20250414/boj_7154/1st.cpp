@@ -5,8 +5,8 @@
 using namespace std;
 
 int satisfaction[3][4] = {{4, 3, 2, 1}, {8, 7, 6, 5}, {12, 11, 10, 9}};
-int N, M, ans, src, sink, C[211][211], F[211][211], D[211][211], pre[211], dist[211], checker[211];
-vector<int> G[211];
+int N, M, ans, src, sink, C[213][213], F[213][213], D[213][213], pre[213], dist[213], checker[213];
+vector<int> G[213];
 
 int main() {
     ios::sync_with_stdio(false);
