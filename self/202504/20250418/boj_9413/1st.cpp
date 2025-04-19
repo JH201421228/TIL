@@ -22,14 +22,14 @@ int main() {
         ans = 0;
 
         cin >> N >> M;
-        fill(C[0], C[603], new int[603]); fill(D[0], D[603], new int[603]); fill(F[0], F[603], new int[603]);
+        fill(&C[0][0], &C[0][0]+606*603, 0); fill(&D[0][0], &D[0][0]+603*603, 0); fill(&F[0][0], &F[0][0]+603*603, 0);
 
         for (int i = 1; i < N+1; ++i) {
             set_edge(i, i+N); set_edge(src, i); set_edge(i+N, sink); D[i][i+N] = -1; D[i+N][i] = 1;
         }
 
         for (int i = 0; i < M; ++i) {
-            int u, v; cin >> u >> u; set_edge(u+N, v);
+            int u, v; cin >> u >> v; set_edge(u+N, v);
         }
 
         for (int i = 0; i < 2; ++i) {
