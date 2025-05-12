@@ -67,11 +67,19 @@ public class Main {
         String[] AB = br.readLine().split(" "); int A = Integer.parseInt(AB[0]), B = Integer.parseInt(AB[1]);
         src = A<<1;
         sink = B<<1|1;
+        set_edge(A<<1, A<<1|1, 1, 0);
+        set_edge(B<<1, B<<1|1, 1, 0);
 
-        for (int i = 0; i < 2; ++i) ans += solve();
+        for (int i = 0; i < 2; ++i) {
+            int cost = solve();
+            if (cost == Integer.MAX_VALUE) {
+                System.out.println(-1);
+                return;
+            }
+            ans += cost;
+        }
         
-        if (ans == Integer.MAX_VALUE) System.out.println(-1);
-        else System.out.println(ans);;
+        System.out.println(ans);
 
         return;
     }
