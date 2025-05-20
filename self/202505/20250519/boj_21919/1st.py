@@ -18,7 +18,9 @@ arr = list(map(int, input().split()))
 ans = 1
 
 for n in arr:
-    if sieve[n]: ans *= n
+    if sieve[n]:
+        ans *= n
+        sieve[n] = 0
 
 if ans == 1: print(-1)
 else: print(ans)
