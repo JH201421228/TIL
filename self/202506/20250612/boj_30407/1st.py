@@ -12,7 +12,7 @@ def solve():
     status[0][0] = 0
 
     for i in range(N):
-        for 
+        for
 
     return
 
