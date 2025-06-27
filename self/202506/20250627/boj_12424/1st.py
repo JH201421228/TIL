@@ -70,7 +70,7 @@ def spfa(src, sink, G):
 
             n = pre[n]
 
-        res -= dist[sink]
+        res -= dist[sink]*flow
 
     return res
 
