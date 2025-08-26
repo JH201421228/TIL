@@ -5,20 +5,20 @@ input = sys.stdin.readline
 
 
 def find_parent(p, x):
-    if p[x] != x:
-        p[x] = find_parent(p, p[x])
+    if p[x] < 0: return x
+    p[x] = find_parent(p, p[x])
 
     return p[x]
 
 
 def union_parent(p, a, b):
-    a = find_parent(p, a)
-    b = find_parent(p, b)
-
-    if a < b:
+    if p[a] < p[b]:
         p[b] = a
     else:
+        if p[a] == p[b]:
+            p[b] -= 1
         p[a] = b
+
     return
 
 
@@ -40,12 +40,12 @@ def solve():
     ans = [0, [0, 0], [0, 0], [0, 0]]
     idx = 0
     cnt = 0
-    p = [i for i in range(N+1)]
+    p = [-1] * (N+1)
     while G:
         w, pr, u, v = G[idx]
 
-        if find_parent(p, u) != find_parent(p, v):
-            union_parent(p, u, v)
+        if (a := find_parent(p, u)) != (b := find_parent(p, v)):
+            union_parent(p, a, b)
             ans[0] += w
             ans[priorities[pr]+1][0] += 1
             ans[priorities[pr]+1][1] += w
