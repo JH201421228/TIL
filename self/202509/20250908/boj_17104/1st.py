@@ -6,8 +6,9 @@ input = sys.stdin.readline
 
 PI = math.pi
 n = 1_000_000
-N = 1 << 21
-isPrime = [0] * N
+N = 1 << 20
+isPrime = [0] * (N<<1)
+oddPrime = [0] * N
 
 def fft(v, inv):
     j = 0
@@ -68,15 +69,24 @@ def sieve():
             for j in range(i**2, n+1, i):
                 isPrime[j] = 0
 
+    for idx in range(N):
+        oddPrime[idx] = isPrime[idx*2+1]
+
     return
 
 
 def main():
     sieve()
-    fft_wrapper(isPrime)
+
+    fft_wrapper(oddPrime)
 
     for _ in range(int(input())):
-        print((int(isPrime[int(input())].real)+1)//2)
+        tmp = int(input())
+
+        if tmp == 4:
+            print(1)
+        else:
+            print((int(round(oddPrime[(tmp-2)//2].real))+1)//2)
 
     return
 
