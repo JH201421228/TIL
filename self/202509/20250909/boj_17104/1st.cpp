@@ -9,6 +9,7 @@ const double PI = acos(-1.0);
 
 int n = 1'000'000;
 int N = 1 << 20;
+int T;
 
 cd isPrime[1 << 21];
 cd oddPrime[1 << 20];
@@ -74,11 +75,17 @@ void sieve() {
 
     for (int i = 2; i < sqrt(n)+1; ++i) {
         if (isPrime[i].real() == 1.0) {
-            for (int j = i*i; i < n+1) {
-
+            for (int j = i*i; j < n+1; j += i) {
+                isPrime[j].real(0.0);
             }
         }
     }
+
+    for (int idx = 0; idx < N; ++idx) {
+        oddPrime[idx].real(isPrime[idx*2+1].real());
+    }
+
+    return;
 }
 
 
@@ -87,7 +94,21 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
+    sieve();
 
+    fft_wrapper(oddPrime);
+
+    cin >> T;
+    while (T--) {
+        int tmp; cin >> tmp;
+
+        if (tmp == 4) {
+            cout << 1 << '\n';
+        }
+        else {
+            cout << (int) round(oddPrime[(int) (tmp-2)/2].real() + 1)/2 << '\n';
+        }
+    }
 
     return 0;
 }
