@@ -52,7 +52,6 @@ def fft_wrapper(u, v):
 
     while n < length:
         n <<= 1
-    n <<= 1
 
     u.extend([0j] * (n-length))
     v.extend([0j] * (n-len(v)))
