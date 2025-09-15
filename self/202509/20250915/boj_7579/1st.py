@@ -12,12 +12,12 @@ def solve():
     dp = [[0] * (sum(cost)+1) for _ in range(N+1)]
 
     for i in range(1, N+1):
-        for j in range(1, sum(cost)+1):
+        for j in range(sum(cost)+1):
             if j >= cost[i-1]:
-                dp[i][j] = max(dp[i][j-1], dp[i-1][j-cost[i-1]] + bites[i-1])
+                dp[i][j] = dp[i-1][j-cost[i-1]] + bites[i-1]
             dp[i][j] = max(dp[i][j], dp[i-1][j])
 
-    for idx in range(1, sum(cost) + 1):
+    for idx in range(sum(cost) + 1):
         if dp[-1][idx] >= M:
             print(idx)
             break
