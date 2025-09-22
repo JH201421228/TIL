@@ -91,7 +91,7 @@ public class Main {
             int tmp = (int) Math.round(u[i].real);
             if (tmp > 0 && v[i%n] > 0) {
                 if (i%2 > 0) {
-                    ans += (tmp/2) * v[i%2];
+                    ans += (tmp/2) * v[i%n];
                 }
                 else {
                     ans += ((tmp-v[i/2])/2 + v[i/2]) * v[i%n];
@@ -118,8 +118,8 @@ public class Main {
         Arrays.fill(v, 0);
 
         for (int i = 1; i < N; ++i) {
-            ++u[(int) (i*i%N)].real;
-            ++v[(int) (i*i%N)];
+            ++u[(int) (1L*i*i%N)].real;
+            ++v[(int) (1L*i*i%N)];
         }
 
         fft_wrapper(u, v, N);

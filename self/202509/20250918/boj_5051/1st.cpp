@@ -64,7 +64,7 @@ void fft_wrapper(cd* u, int* v, int n) {
 
     fft(u, true);
 
-    int ans = 0;
+    long long ans = 0;
 
     for (int i = 0; i < N; ++i) {
         int tmp = round(u[i].real());
@@ -86,8 +86,8 @@ void fft_wrapper(cd* u, int* v, int n) {
 
 void solve(int N) {
     for (int i = 1; i < N; ++i) {
-        u[(i*i)%N] += cd(1, 0);
-        v[(i*i)%N] += 1;
+        u[(int) ((1ULL*i*i)%N)] += cd(1, 0);
+        v[(int) ((1ULL*i*i)%N)] += 1;
     }
 
     fft_wrapper(u, v, N);
