@@ -7,18 +7,18 @@ input = sys.stdin.readline
 PI = math.pi
 
 
-def dq(N, v):
-    if N == 1:
-        return v
+# def dq(N, v):
+#     if N == 1:
+#         return v
     
-    u = dq(N//2, v)
-    w = dq(N-N//2, v)
+#     u = dq(N//2, v)
+#     w = dq(N-N//2, v)
 
-    res = []
-    for a, b in zip(u, w):
-        res.append(a*b)
+#     res = []
+#     for a, b in zip(u, w):
+#         res.append(a*b)
 
-    return res
+#     return res
 
 
 def fft(v, inv):
@@ -65,16 +65,36 @@ def fft_wrapper(u, K):
 
     fft(u, False)
 
-    u = dq(K, u)
+    # res = FFT(delta) = [1, 1, ..., 1]
+    res = [1+0j] * N
+    base = u[:]  # 현재 밑
+
+    cnt = 0
+    k = K
+    while k > 0:
+        if k & 1:
+            for i in range(N):
+                res[i] = (res[i] * base[i]) / N
+            cnt += 1
+        k >>= 1
+        if k:
+            for i in range(N):
+                base[i] = (base[i] * base[i]) / N
+            cnt += 1
+
+    u = res  # 이후 ifft(u, True)
 
     fft(u, True)
+
+    scale = N ** (cnt + 0)    # IFFT의 /N까지 포함하려면 +1, 이미 반영 여부에 따라 조정
+    for i in range(N):
+        u[i] *= scale
 
     ans = []
     for idx in range(N):
         if round(u[idx].real) > 0:
             ans.append(idx)
 
-    ans.sort()
     print(*ans)
 
     return
