@@ -12,13 +12,15 @@ def union_parent(n, m, parent, parent_size):
     n_p = find_parent(n, parent)
     m_p = find_parent(m, parent)
 
+    if n_p == m_p: return n_p
+    
     if n_p < m_p:
-        parent[m] = n_p
+        parent[m_p] = n_p
         parent_size[n_p] += parent_size[m_p]
         parent_size[m_p] = 0
         return n_p
     else:
-        parent[n] = m_p
+        parent[n_p] = m_p
         parent_size[m_p] += parent_size[n_p]
         parent_size[n_p] = 0
         return m_p
