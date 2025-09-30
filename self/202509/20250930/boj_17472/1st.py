@@ -63,6 +63,23 @@ def check_graph(N, M, cur_map):
     return res
 
 
+def find_parent(n, parent):
+    if parent[n] == n: return n
+    return find_parent(parent[n], parent)
+
+
+def union_find(a, b, parent):
+    a_p = find_parent(a, parent)
+    b_p = find_parent(b, parent)
+
+    if a_p < b_p:
+        parent[b_p] = a_p
+    else:
+        parent[a_p] = b_p
+
+    return
+
+
 def solve():
     N, M = map(int, input().split())
 
@@ -72,11 +89,26 @@ def solve():
 
     graph = check_graph(N, M, cur_map)
 
-    for c in cur_map:
-        print(c)
+    parent = [i for i in range(cnt+1)]
+
+    ans = 0
 
     while graph:
-        print(heapq.heappop(graph))
+        d, a, b = heapq.heappop(graph)
+
+        if find_parent(a, parent) == find_parent(b, parent):
+            continue
+
+        union_find(a, b, parent)
+
+        ans += d
+        cnt -= 1
+
+    if cnt == 1:
+        print(ans)
+    else:
+        print(-1)
+
 
     return
 
