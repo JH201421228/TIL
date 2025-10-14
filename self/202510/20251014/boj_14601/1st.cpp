@@ -41,7 +41,7 @@ array<array<int, 2>, 4> set_num(int i, int j, int ti, int tj, int l) {
     else {
         ans[i+l-1][j+l] = cnt;
         res[2][0] = i+l-1;
-        res[2][1] = j+l-1;
+        res[2][1] = j+l;
     }
 
     if (ti >= i+l && ti < i+l*2 && tj >= j+l && tj < j+l*2) {
@@ -49,8 +49,8 @@ array<array<int, 2>, 4> set_num(int i, int j, int ti, int tj, int l) {
     }
     else {
         ans[i+l][j+l] = cnt;
-        res[3][0] = i+l-1;
-        res[3][1] = j+l-1;
+        res[3][0] = i+l;
+        res[3][1] = j+l;
     }
 
     ++cnt;
