@@ -19,7 +19,7 @@ def set_dp(n, G, V, dp, weights):
 def find_node(n, G, V, dp, ans, pre_use):
     V[n] = 1
 
-    if not dp[n][0] > dp[n][1]:
+    if not pre_use and not dp[n][0] > dp[n][1]:
         ans.append(n)
 
     for x in G[n]:
