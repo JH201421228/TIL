@@ -50,3 +50,37 @@ Olympiad > Croatian Highschool Competitions in Informatics > 2007 > Croatian Oly
 자료 구조 📌
 스택 📌
 메모
+
+
+14
+7
+7
+8
+6
+5
+3
+7
+4
+7
+7
+10
+6
+1
+2
+
+25
+
+
+10
+10
+9
+1
+3
+8
+6
+7
+8
+5
+8
+
+17
