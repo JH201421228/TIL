@@ -11,8 +11,6 @@ def solve():
     bomb_word = input().rstrip()
     bomb_word_length = len(bomb_word)
 
-    print(bomb_word)
-
     while Q:
         S.append(Q.popleft())
 
