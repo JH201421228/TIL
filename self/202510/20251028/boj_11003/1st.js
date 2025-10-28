@@ -40,7 +40,7 @@ rl.on("close", () => {
             D[idx] = q[0][0];
         }
 
-        console.log(...D);
+        console.log(D.join(' '));
 
         return;
     }
