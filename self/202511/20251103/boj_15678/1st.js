@@ -24,6 +24,8 @@ rl.on("close", () => {
         if (q.length === 0) cur = K[idx];
         else cur = q[0][0] + K[idx];
 
+        if (cur <= 0) cur = 0;
+
         ans = Math.max(cur, ans);
 
         while (q.length > 0 && idx - q[0][1] >= D) q.shift();
