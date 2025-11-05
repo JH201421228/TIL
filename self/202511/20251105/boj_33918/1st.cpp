@@ -25,7 +25,7 @@ void solve() {
             }
 
             for (int temp = offset; temp < M+1; temp += C) {
-                if (temp != offset && temp+D < M+1) pq.emplace(dp[temp][temp+D], temp+D);
+                if (temp != offset && temp+D < M+1) pq.emplace(dp[time][temp+D], temp+D);
 
                 while (!pq.empty() && pq.top().second + D < temp) pq.pop();
 
