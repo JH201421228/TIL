@@ -7,7 +7,7 @@ input = sys.stdin.readline
 # 겹치는게 없으면 교차 판정하기
 
 def isOnLine(l, p):
-    if p[0] > min(l[0], l[2]) and p[0] < max(l[0], l[2]) and p[1] > min(l[1], l[3]) and p[1] < max(l[1], l[3]):
+    if p[0] >= min(l[0], l[2]) and p[0] <= max(l[0], l[2]) and p[1] >= min(l[1], l[3]) and p[1] <= max(l[1], l[3]):
         if (l[0] - p[0]) * (l[3] - p[1]) == (l[1] - p[1]) * (l[2] - p[0]): return True
 
     return False
