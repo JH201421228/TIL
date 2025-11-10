@@ -6,13 +6,6 @@ input = sys.stdin.readline
 PI = math.pi
 
 
-def getArea(circles):
-    
-
-
-    return
-
-
 def solve():
     circles = list(map(float, input().split()))
 
@@ -22,9 +15,9 @@ def solve():
     r1_r2_sub = abs(circles[2] - circles[5])
 
     if centric_length >= r1_r2_add: 
-        print(0.00)
+        print(f"{0.000:.3f}")
     elif centric_length <= r1_r2_sub:
-        print(PI * (min(circles[2], circles[5])**2))
+        print(f"{PI * (min(circles[2], circles[5])**2):.3f}")
     else:
         theta1 = math.acos((circles[2]**2 - circles[5]**2 + centric_length**2) / (2*circles[2]*centric_length))
         theta2 = math.acos((-circles[2]**2 + circles[5]**2 + centric_length**2) / (2*circles[5]*centric_length))
@@ -32,7 +25,7 @@ def solve():
         res1 = (circles[2]**2 * theta1) - (circles[2]**2 * math.sin(2*theta1) / 2)
         res2 = (circles[5]**2 * theta2) - (circles[5]**2 * math.sin(2*theta2) / 2)
 
-        print(res1 + res2)
+        print(f"{res1 + res2:.3f}")
 
     return
 
