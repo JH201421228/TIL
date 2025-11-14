@@ -22,9 +22,6 @@ def solve():
 
     print((dp[N-3][K-1] + dp[N-1][K]) % MOD)
 
-    for d in dp:
-        print(d)
-
     return
 
 

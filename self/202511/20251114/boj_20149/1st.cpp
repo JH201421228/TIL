@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 using ld = long double;
@@ -151,6 +152,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    cout.setf(ios::fixed);
+    cout << setprecision(10);
 
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 4; ++j) cin >> lines[i][j];
