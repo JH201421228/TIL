@@ -15,7 +15,7 @@ def solve():
         
         idx += 1
         
-    A = s + idx + 1
+    A = (s + idx) % 10_000 + 1
     
     idx = 0
     while True:
@@ -26,7 +26,7 @@ def solve():
         
         idx += 1
         
-    print("!", A + s + idx + 1)
+    print("!", A + (s + idx) % 10_000 + 1)
     
     return
 

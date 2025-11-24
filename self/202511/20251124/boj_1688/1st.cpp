@@ -46,11 +46,11 @@ int is_cross_line(pair<long long, long long> p) {
 void solve() {
     cin >> N;
 
-    for (int idx = 0; idx > N; ++idx) {
+    for (int idx = 0; idx < N; ++idx) {
         cin >> dots[idx].first >> dots[idx].second;
     }
     
-    for (int idx = 0; idx < N; ++idx) {
+    for (int idx = 0; idx < 3; ++idx) {
         pair<long long, long long> temp;
         cin >> temp.first >> temp.second;
 
@@ -71,7 +71,7 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-
+    solve();
 
     return 0;
 }
