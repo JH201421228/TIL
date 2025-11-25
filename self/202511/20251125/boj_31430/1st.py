@@ -22,7 +22,7 @@ def solve():
         res = 0
         
         for idx in range(13):
-            res += (ord(cur[idx]) - 97) * (13**idx)
+            res += (ord(cur[idx]) - 97) * (26**idx)
     
         print(res)
         
