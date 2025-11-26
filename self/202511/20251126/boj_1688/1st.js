@@ -58,7 +58,7 @@ rl.on("close", () => {
 
 
     function solve() {
-        for (let idx = 0; idx < N; ++idx) {
+        for (let idx = 0; idx < 3; ++idx) {
             const temp = input[z++].split(' ').map(Number);
 
             if (is_cross_line(temp) === 1) {

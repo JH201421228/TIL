@@ -14,11 +14,11 @@ def solve():
     res.append(int(input()))
 
     if res[0] == res[1]:
-        print(0)
+        print(f"! 0")
     elif res[0] < res[1]:
-        print(1)
+        print(f"! 1")
     else:
-        print(-1)
+        print(f"! -1")
 
     return
 
