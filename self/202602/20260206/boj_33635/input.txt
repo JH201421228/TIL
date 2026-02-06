@@ -1,0 +1,14 @@
+5
+fantasy mystery romance scifi horror
+7
+2 bookone fantasy mystery
+1 booktwo scifi
+3 bookthree fantasy scifi horror
+2 bookfour mystery horror
+1 bookfive romance
+2 booksix fantasy romance
+3 bookseven fantasy mystery romance
+3
+2 fantasy scifi
+1 romance
+3 mystery romance horror
