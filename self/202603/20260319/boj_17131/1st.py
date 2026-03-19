@@ -17,11 +17,11 @@ def S(s, e, l, r, tree_idx, tree):
 
 
 def U(s, e, idx, tree_idx, tree):
-    if s == e and s == idx:
+    if s > idx or e < idx: return
+    
+    if s == e:
         tree[tree_idx] += 1
         return
-    
-    if s > idx or e < idx: return
     
     mid = (s+e)>>1
     
